@@ -1,0 +1,11 @@
+node_modules/
+.pnpm-store/
+.playwright/
+dist/
+.env
+.env.*
+!.env.example
+.sites-runtime/
+qa/
+*.log
+.demo-process.json

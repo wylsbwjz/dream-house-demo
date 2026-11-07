@@ -1,0 +1,13 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {runAgent,parseWithModel,apiHandler} from '../server/agent.mjs';
+import {initialState,makeProposal,moveObject} from '../src/core.mjs';
+const env={MODEL_API_KEY:'test-only',MODEL_NAME:'mock',MODEL_BASE_URL:'https://example.invalid'};
+const intent={target:'table-01',minLength:140,minWidth:75,cheaper:true,tone:'浅木色'};
+const response=(calls)=>Response.json({choices:[{message:{role:'assistant',content:null,tool_calls:calls.map(([name,args],i)=>({id:'tool'+i,type:'function',function:{name,arguments:JSON.stringify(args||{})}}))}}]});
+test('agent actually dispatches bounded tools and produces verified proposal',async()=>{const requests=[];let i=0;const fetcher=async(url,options)=>{requests.push(JSON.parse(options.body));return [()=>response([['read_current_plan']]),()=>response([['search_catalog']]),()=>response([['calculate_impact',{productId:'T150-Lite'}],['calculate_impact',{productId:'T140'}]]),()=>response([['submit_proposal']])][i++]();};const events=[];const p=await runAgent(env,initialState(),intent,'r1',e=>events.push(e),undefined,fetcher);assert.equal(p.mode,'live');assert.equal(requests.length,4);assert.ok(events.find(e=>e.stage==='ready'));assert.equal(p.results.find(r=>r.productId==='T140').known,758000);});
+test('agent cannot submit before tools have checked eligible candidates',async()=>{let count=0;await assert.rejects(runAgent(env,initialState(),intent,'r',()=>{},undefined,async()=>{count++;return response([['submit_proposal']]);}),/六轮/);assert.equal(count,6);});
+test('model parse keeps missing dimensions missing',async()=>{const r=await parseWithModel(env,'小一点',{},undefined,async()=>Response.json({choices:[{message:{content:JSON.stringify({intent:{target:'table-01',minLength:null,minWidth:null},issues:[]})}}]}));assert.equal(r.intent.minLength,null);assert.ok(r.issues.length);});
+test('missing credential is explicit, no offline fallback',async()=>{await assert.rejects(runAgent({},initialState(),intent,'r'),/尚未配置/);});
+test('server rejects stale application at validation boundary',async()=>{const s=initialState(),p=makeProposal(s,intent);const req=new Request('http://localhost/api/validate-apply',{method:'POST',headers:{origin:'http://localhost'},body:JSON.stringify({state:moveObject(s,'table-01',{x:380}),proposal:p,productId:'T140',schemeId:'C'})});const r=await apiHandler(req,{});assert.equal(r.status,400);assert.match((await r.json()).error,/重新校验/);});
+test('server refuses cross origin mutations',async()=>{const r=await apiHandler(new Request('http://localhost/api/parse',{method:'POST',headers:{origin:'https://other.invalid'},body:'{}'}),{});assert.equal(r.status,403);});
