@@ -636,7 +636,7 @@ export function Drawers({ state, actions, table, currentProduct, stale }) {
   const inspirationContent = (
     <>
       <div className="inspiration-hero">
-        <img src="/img/material-ref.jpg" alt="木作与自然光材质参考" />
+        <img src={`${import.meta.env.BASE_URL}img/material-ref.jpg`} alt="木作与自然光材质参考" />
         <div className="inspiration-overlay">
           <span>材质与光</span>
           <b>白蜡木 / 亚麻 / 陶土</b>

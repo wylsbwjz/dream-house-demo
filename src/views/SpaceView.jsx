@@ -27,7 +27,7 @@ const MODES = [
 function PhotoStage({ state, actions, onSwitchToIso }) {
   return (
     <div className="photo-stage">
-      <img src="/img/room-c.jpg" alt="客厅实拍参考" draggable={false} />
+      <img src={`${import.meta.env.BASE_URL}img/room-c.jpg`} alt="客厅实拍参考" draggable={false} />
       <div className="photo-overlay" />
       <div className="photo-flag">
         <InfoCircleOutlined /> 实拍参考 · 不参与几何校验与费用

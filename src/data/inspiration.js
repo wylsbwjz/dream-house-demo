@@ -13,7 +13,7 @@ export const INSPIRATIONS = [
   {
     id: 'insp-nordic',
     title: '浅木色小户型，一张桌子两用',
-    cover: '/img/insp-nordic.jpg',
+    cover: `${import.meta.env.BASE_URL}img/insp-nordic.jpg`,
     source: '示例案例 · 居住改造',
     space: '客厅 22㎡',
     budget: '¥7,900',
@@ -34,7 +34,7 @@ export const INSPIRATIONS = [
   {
     id: 'insp-wood',
     title: '原木长桌的餐桌区节奏',
-    cover: '/img/insp-wood.jpg',
+    cover: `${import.meta.env.BASE_URL}img/insp-wood.jpg`,
     source: '示例案例 · 材质笔记',
     space: '客厅 24㎡',
     budget: '¥8,300',
@@ -55,7 +55,7 @@ export const INSPIRATIONS = [
   {
     id: 'insp-olive',
     title: '绿植与阳光：轻盈的客厅底色',
-    cover: '/img/insp-olive.jpg',
+    cover: `${import.meta.env.BASE_URL}img/insp-olive.jpg`,
     source: '示例案例 · 氛围参考',
     space: '客厅 26㎡',
     budget: '¥8,900',
@@ -76,7 +76,7 @@ export const INSPIRATIONS = [
   {
     id: 'insp-cream',
     title: '奶油侘寂：少而软的用餐角落',
-    cover: '/img/insp-cream.jpg',
+    cover: `${import.meta.env.BASE_URL}img/insp-cream.jpg`,
     source: '示例案例 · 风格参考',
     space: '客厅 20㎡',
     budget: '¥7,200',

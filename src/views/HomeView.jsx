@@ -147,7 +147,7 @@ export function HomeView({ state, actions, known }) {
               </div>
             </div>
             <div className="home-hero-visual">
-              <img src="/img/room-c.jpg" alt="客厅示例渲染" draggable={false} />
+              <img src={`${import.meta.env.BASE_URL}img/room-c.jpg`} alt="客厅示例渲染" draggable={false} />
               <span className="home-hero-scrim" />
               <div className="home-hero-flags">
                 <span>客厅 · 约 24.6㎡</span>
@@ -203,7 +203,7 @@ export function HomeView({ state, actions, known }) {
               <RoomCard
                 active
                 name="客厅"
-                thumb="/img/room-a.jpg"
+                thumb={`${import.meta.env.BASE_URL}img/room-a.jpg`}
                 status={`方案 C v${state.version} · 餐桌 ${currentProduct.name}`}
                 actions={actions}
               />
