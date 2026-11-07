@@ -5,7 +5,7 @@ export default defineConfig({
       ignored: ['**/legacy/**', '**/qa/**', '**/dist/**', '**/.playwright/**', '**/.pnpm-store/**'],
     },
   },
-  build: { outDir: 'dist/client', chunkSizeWarningLimit: 900 },
+  build: { outDir: 'dist/client', chunkSizeWarningLimit: 900, base: './' },
   css: { preprocessorOptions: { less: { javascriptEnabled: true, modifyVars: {
     'primary-color':'#5B3A2E', 'link-color':'#5B3A2E', 'text-color':'#3B2A22',
     'text-color-secondary':'#7A6555', 'heading-color':'#3B2A22', 'body-background':'#FAF8F4',
