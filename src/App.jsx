@@ -11,6 +11,7 @@ import { SpaceView } from './views/SpaceView.jsx';
 import { CompareView } from './views/CompareView.jsx';
 import { ShopView } from './views/ShopView.jsx';
 import { BudgetView } from './views/BudgetView.jsx';
+import { WelcomeView } from './views/WelcomeView.jsx';
 import { Drawers } from './components/Drawers.jsx';
 import { CommandPalette, Toast } from './components/Overlays.jsx';
 import { RightOutlined } from '@ant-design/icons';
@@ -63,10 +64,15 @@ export default function App() {
     state.view === 'shop' ||
     state.view === 'canvas' ||
     state.view === 'home' ||
-    state.view === 'inspiration';
+    state.view === 'inspiration' ||
+    state.view === 'welcome';
   const showRail = !wide && !state.ui.railCollapsed;
   const showPanel = !wide;
   const workspaceViews = ['canvas', 'space', 'compare', 'budget'];
+
+  if (state.view === 'welcome') {
+    return <WelcomeView state={state} actions={actions} known={known} />;
+  }
 
   return (
     <div className={`app-shell ${fullscreen ? 'is-fullscreen' : ''} ${wide ? 'is-wide' : ''}`}>

@@ -1008,7 +1008,7 @@ export function Drawers({ state, actions, table, currentProduct, stale }) {
         onOk={() => {
           actions.resetDemo();
           close();
-          actions.setView('home');
+          actions.setView('welcome');
           actions.setGuideOpen(false);
         }}
         className="dh-modal"

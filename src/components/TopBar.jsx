@@ -76,7 +76,7 @@ export function TopBar({ state, actions, onFullscreen, fullscreen }) {
   return (
     <header className="topbar">
       <div className="topbar-left">
-        <button className="brand-click" onClick={() => actions.setView('home')} aria-label="回到我的家">
+        <button className="brand-click" onClick={() => actions.setView('welcome')} aria-label="回到起始页">
           <Logo />
         </button>
       </div>

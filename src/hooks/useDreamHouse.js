@@ -81,7 +81,7 @@ export function createInitialState() {
   };
   return {
     schema: SCHEMA,
-    view: 'home',
+    view: 'welcome',
     schemeId: 'C',
     objects,
     version: 3,
@@ -134,7 +134,7 @@ const hydrate = () => {
       selectedObjectId: saved.selectedObjectId || 'table-01',
       favorites: Array.isArray(saved.favorites) ? saved.favorites : [],
       notes: Array.isArray(saved.notes) ? saved.notes : [],
-      view: 'home',
+      view: 'welcome',
       agent: initialAgent(),
       ui: initialUi(),
       restored: true,
